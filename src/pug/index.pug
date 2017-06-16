@@ -1,0 +1,125 @@
+extends ./templates/main-layout.pug
+
+append config
+	- var title = "index title"
+
+block headerstylesheets
+	link(href="css/styles.css" type="text/css" rel="stylesheet")
+
+block main
+	header
+		h1.header Form Serialize Test
+	main 
+		section.content
+			h1.content__heading Send Me a Message
+			p.content__lede Use this handy contact form to get in touch with me.
+
+			form.content__form.contact-form
+			
+				.testing
+					p Does this do anything?
+
+				.contact-form__input-group
+					input#salutation-mr.contact-form__input.contact-form__input--radio(
+						name="salutation"
+						type="radio"
+						value="Mr."
+					)
+					label.contact-form__label.contact-form__label--radio(
+						for="salutation-mr"
+					) Mr.
+					input#salutation-mrs.contact-form__input.contact-form__input--radio(
+						name="salutation"
+						type="radio"
+						value="Mrs."
+					)
+					label.contact-form__label.contact-form__label--radio(
+						for="salutation-mrs"
+					) Mrs.
+					input#salutation-ms.contact-form__input.contact-form__input--radio(
+						name="salutation"
+						type="radio"
+						value="Ms."
+					)
+					label.contact-form__label.contact-form__label--radio(
+						for="salutation-ms"
+					) Ms.
+
+				.contact-form__input-group
+					label.contact-form__label(
+						for="name"
+					) Full Name
+					input#name.contact-form__input.contact-form__input--text(
+						name="name"
+						type="text"
+					)
+
+				.contact-form__input-group
+					label.contact-form__label(
+						for="email"
+					) Email Address
+					input#email.contact-form__input.contact-form__input--email(
+						name="email"
+						type="email"
+					)
+
+				.contact-form__input-group
+					label.contact-form__label(
+						for="subject"
+					) How can I help you?
+					select#subject.contact-form__input.contact-form__input--select(
+						name="subject"
+					)
+						option I have a problem.
+						option I have a general question.
+
+				.contact-form__input-group
+					label.contact-form__label(
+						for="message"
+					) Enter a Message
+					textarea#message.contact-form__input.contact-form__input--textarea(
+						name="message"
+						rows="6"
+						cols="65"
+					)
+
+				.contact-form__input-group
+					p.contact-form__label--checkbox-group Please send me:
+					input#snacks-pizza.contact-form__input.contact-form__input--checkbox(
+						name="snacks"
+						type="checkbox"
+						value="pizza"
+					)
+					label.contact-form__label.contact-form__label--checkbox(
+						for="snacks-pizza"
+					) Pizza
+					input#snacks-cake.contact-form__input.contact-form__input--checkbox(
+						name="snacks"
+						type="checkbox"
+						value="cake"
+					)
+					label.contact-form__label.contact-form__label--checkbox(
+						for="snacks-cake"
+					) Cake
+					
+				//- A hidden input to demonstrate that these are grabbed as well.
+				input(
+					name="secret"
+					type="hidden"
+					value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"
+				)
+
+				button.contact-form__button(
+					type="submit"
+				) Send It!
+
+		.results
+			h2.results__heading Form Data
+			pre.results__display-wrapper
+				code.results__display
+
+
+	block foot
+		footer 
+			p
+				|  should be footer
