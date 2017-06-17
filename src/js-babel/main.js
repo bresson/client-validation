@@ -101,32 +101,78 @@ const formToJSON = elements => [].reduce.call(elements, (data, element) => {
   return data;
 }, {});
 
+const post = url => data => (
+  fetch(url, {
+    method: "POST", 
+    body: data
+  })
+    .then( res => res.json() )
+    .then( res => console.log( 'RETURN DATA' , res))
+    .catch( error => console.log('error', error))
+)
+
+const ezpost = (parum) => {
+  return fetch('./form.php', {
+    headers: {
+      'Content-Type' : 'application/json'
+    },
+    method: "POST", 
+    body: parum
+  })
+    .then( res => res.json() )
+    .then( res => console.log( 'RETURN DATA' , res))
+    .catch( error => console.log('error', error))
+}
 /**
  * A handler function to prevent default submission and run our custom script.
  * @param  {Event} event  the submit event triggered by the user
  * @return {void}
  */
-const handleFormSubmit = event => {
+
+const handleFormSubmit = form => {
   
   // Stop the form from submitting since we’re handling that with AJAX.
-  event.preventDefault();
+  // event.preventDefault();
   
   // Call our function to get the form data.
   const data = formToJSON(form.elements);
+  //console.log([...form.elements]);
 
   // Demo only: print the form data onscreen as a formatted JSON object.
   const dataContainer = document.getElementsByClassName('results__display')[0];
   
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
   dataContainer.textContent = JSON.stringify(data, null, "  ");
+
+  post("./form.php")(JSON.stringify(data));
+  //ezpost( JSON.stringify(data) );
   
   // ...this is where we’d actually do something with the form data...
 };
+
+
 
 /*
  * This is where things actually get started. We find the form element using
  * its class name, then attach the `handleFormSubmit()` function to the 
  * `submit` event.
  */
-const form = document.getElementsByClassName('contact-form')[0];
-form.addEventListener('submit', handleFormSubmit);
+// const form = document.getElementsByClassName('contact-form')[0];
+// form.addEventListener('submit', handleFormSubmit);
+
+
+(function(){
+		$('#contact-form').parsley().on('field:validated', function() {
+			var ok = $('.parsley-error').length === 0;
+			$('.bs-callout-info').toggleClass('hidden', !ok);
+			$('.bs-callout-warning').toggleClass('hidden', ok);
+		})
+		.on('form:submit', function(e) {
+
+      console.log(document.getElementById('contact-form').elements)
+      
+      handleFormSubmit( document.getElementById('contact-form'))
+      
+      return false;
+		});
+})();

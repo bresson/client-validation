@@ -4,7 +4,11 @@ append config
 	- var title = "index title"
 
 block headerstylesheets
+	link(href="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.8.10/hyperform.css" type="text/css" rel="stylesheet")
 	link(href="css/styles.css" type="text/css" rel="stylesheet")
+
+block headerscripts
+	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js")
 
 block main
 	header
@@ -14,7 +18,7 @@ block main
 			h1.content__heading Send Me a Message
 			p.content__lede Use this handy contact form to get in touch with me.
 
-			form.content__form.contact-form
+			form#contact-form.content__form.contact-form
 			
 				.testing
 					p Does this do anything?
@@ -23,7 +27,8 @@ block main
 					input#salutation-mr.contact-form__input.contact-form__input--radio(
 						name="salutation"
 						type="radio"
-						value="Mr."
+						value="Mr.", 
+						required=""
 					)
 					label.contact-form__label.contact-form__label--radio(
 						for="salutation-mr"
@@ -32,6 +37,7 @@ block main
 						name="salutation"
 						type="radio"
 						value="Mrs."
+						
 					)
 					label.contact-form__label.contact-form__label--radio(
 						for="salutation-mrs"
@@ -52,6 +58,7 @@ block main
 					input#name.contact-form__input.contact-form__input--text(
 						name="name"
 						type="text"
+						required
 					)
 
 				.contact-form__input-group
@@ -61,6 +68,7 @@ block main
 					input#email.contact-form__input.contact-form__input--email(
 						name="email"
 						type="email"
+						required
 					)
 
 				.contact-form__input-group
@@ -89,6 +97,7 @@ block main
 						name="snacks"
 						type="checkbox"
 						value="pizza"
+						required
 					)
 					label.contact-form__label.contact-form__label--checkbox(
 						for="snacks-pizza"
