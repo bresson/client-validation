@@ -123,6 +123,10 @@ const ezpost = (parum) => {
     .then( res => console.log( 'RETURN DATA' , res))
     .catch( error => console.log('error', error))
 }
+
+
+
+
 /**
  * A handler function to prevent default submission and run our custom script.
  * @param  {Event} event  the submit event triggered by the user
@@ -144,8 +148,17 @@ const handleFormSubmit = form => {
   // Use `JSON.stringify()` to make the output valid, human-readable JSON.
   dataContainer.textContent = JSON.stringify(data, null, "  ");
 
-  post("./form.php")(JSON.stringify(data));
+  // post("./form.php")(JSON.stringify(data));
   //ezpost( JSON.stringify(data) );
+
+  $.ajax({
+    type: "POST",
+    url: './form.php',
+    data: data,
+    success: console.log("SUCCESS")
+  }).done(function(response) {
+    console.log('response', response)
+  })
   
   // ...this is where we’d actually do something with the form data...
 };

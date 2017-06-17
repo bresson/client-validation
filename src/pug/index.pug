@@ -59,6 +59,7 @@ block main
 						name="name"
 						type="text"
 						required
+						data-parsley-error-message="Please input your first and last name"
 					)
 
 				.contact-form__input-group
@@ -69,6 +70,8 @@ block main
 						name="email"
 						type="email"
 						required
+						data-parsley-type="email"
+						data-parsley-error-message="must be a valid email address"
 					)
 
 				.contact-form__input-group
@@ -111,12 +114,6 @@ block main
 						for="snacks-cake"
 					) Cake
 					
-				//- A hidden input to demonstrate that these are grabbed as well.
-				input(
-					name="secret"
-					type="hidden"
-					value="1b3a9374-1a8e-434e-90ab-21aa7b9b80e7"
-				)
 
 				button.contact-form__button(
 					type="submit"
